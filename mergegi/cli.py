@@ -40,5 +40,5 @@ from . import mergegi
     default=True,
     help="Disable it if you need data per lanes"
 )
-def main(samplesheet, input_dir, output_dir, paired, merge):
-    mergegi(samplesheet, input_dir, output_dir, paired, merge)
+def main(samplesheet, input_directory, output_directory, paired, merge):
+    mergegi(samplesheet, input_directory, output_directory, paired, merge)
