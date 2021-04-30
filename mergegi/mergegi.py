@@ -23,12 +23,12 @@ def mergegi(barcodes_csv, raw_data_dir, merged_data_dir, paired=False, merge_lan
         next(csv_reader)
         # Cluster barcode that need to be merge
         for samplename, barcode, barcode2, project, lane in csv_reader:
-            file_to_merge[project][samplename][lane].append(barcode)
+            file_to_merge[project][samplename][lane.rstrip()].append(barcode)
 
     # Choosing merge function
     merge_sample_files = merge_all if merge_lanes else merge_per_lane
     # Set the input format for glob
-    input_fformat = f"{raw_data_dir}/*{{lane}}/*{{lane}}_{{barcodes}}_{{p}}*"
+    input_fformat = f"{raw_data_dir}/L0{{lane}}/*_L0{{lane}}_{{barcode}}_{{p}}*gz"
     pair = ['1', '2'] if paired else ['1']
     # Merge files
     for project_name, samples in file_to_merge.items():
@@ -54,8 +54,8 @@ def merge_all(sample_name, lanes, p, inputff, outdir):
     """
     # Iter on files to merge
     files_to_merge = (
-        filename for lane, barcodes in lanes.items()
-        for filename in glob.iglob(inputff.format(lane=lane, barcodes=barcodes, p=p))
+        filename for lane, barcodes in lanes.items() for barcode in barcodes
+        for filename in glob.iglob(inputff.format(lane=lane, barcode=barcode, p=p))
     )
     # Merge all files
     with ExitStack() as stack:
@@ -77,8 +77,8 @@ def merge_per_lane(sample_name, lanes, p, inputff, outdir):
     for lane, barcodes in lanes.items():
         with ExitStack() as stack:
             files = [
-                stack.enter_context(open(filename, 'rb')) for filename in glob.iglob(
-                    inputff.format(lane=lane, barcodes=barcodes, p=p)
+                stack.enter_context(open(filename, 'rb')) for barcode in barcodes for filename in glob.iglob(
+                    inputff.format(lane=lane, barcode=barcode, p=p)
                 )
             ]
             with open(os.path.join(outdir, f'{sample_name}_L0{lane}_{p}.fq.gz'), 'wb') as filout:
