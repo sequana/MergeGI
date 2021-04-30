@@ -28,7 +28,7 @@ from . import mergegi
     metavar='OUTDIR',
     nargs=1,
     required=True,
-    help="MGI output directory."
+    help="Output directory with merged data."
 )
 @click.option(
     '-p', '--paired',
