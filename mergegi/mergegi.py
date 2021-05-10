@@ -2,8 +2,21 @@ import csv
 import glob
 import os
 import shutil
+import sys
 from collections import defaultdict
 from contextlib import ExitStack
+
+
+# Set the logger
+import logging
+handler = logging.StreamHandler()
+handler.setFormatter(logging.Formatter(
+    '%(asctime)s :: %(levelname)s :: %(message)s',
+    "%Y-%m-%d %H:%M:%S"
+))
+logger = logging.getLogger(__name__)
+logger.setLevel('INFO')
+logger.addHandler(handler)
 
 
 def mergegi(barcodes_csv, raw_data_dir, merged_data_dir, paired=False, merge_lanes=True):
@@ -19,8 +32,14 @@ def mergegi(barcodes_csv, raw_data_dir, merged_data_dir, paired=False, merge_lan
     file_to_merge = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     with open(barcodes_csv) as csvfile:
         csv_reader = csv.reader(csvfile, skipinitialspace=True)
-        # Skip header
-        next(csv_reader)
+        try:
+            # skip header and check if column count is good
+            samplename, barcode, barcode2, project, lane = next(csv_reader)
+        except ValueError:
+            msg = ("Samplesheet is malformed. You must have samples names, barcode1, barcode2,"
+                   " project names and lanes in this order.")
+            logger.error(msg)
+            sys.exit(1)
         # Cluster barcode that need to be merge
         for samplename, barcode, barcode2, project, lane in csv_reader:
             file_to_merge[project][samplename][lane.rstrip()].append(barcode)
