@@ -1,5 +1,6 @@
 import gzip
 import os
+import pytest
 
 from mergegi import mergegi
 from . import test_dir
@@ -69,3 +70,12 @@ def test_mergegi_per_lane(tmpdir):
     with open(expected_file, 'rb') as expect_file:
         with gzip.open(b_sample) as filin:
             assert expect_file.read() == filin.read()
+
+
+def test_missing_column_csv(tmpdir):
+    # run merge barcode
+    samplesheet = os.path.join(test_dir, 'resources', 'missing_column.csv')
+    data_dir = os.path.join(test_dir, 'resources', 'mgi')
+    output_dir = tmpdir.join("mergegi_output")
+    with pytest.raises(SystemExit):
+        mergegi(samplesheet, data_dir, output_dir, paired=True)
