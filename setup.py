@@ -17,7 +17,7 @@ setuptools.setup(
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
-        "Operating System :: UNIX",
+        "Operating System :: Unix"
     ],
     packages=setuptools.find_packages(where="mergegi"),
     python_requires=">=3.6",
