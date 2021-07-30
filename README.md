@@ -1,5 +1,7 @@
 # MergeGI
 
+[![Tests](https://github.com/sequana/MergeGI/actions/workflows/main.yml/badge.svg)](https://github.com/sequana/MergeGI/actions/workflows/main.yml)
+
 **MergeGI** provides a single command line to merge and select barcoded raw data from [MGI](https://en.mgi-tech.com/products/) sequencing runs into a set of FastQ files ready for subsequent bioinformatics analysis. 
 
 
