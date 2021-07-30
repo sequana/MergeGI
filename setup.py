@@ -19,7 +19,7 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: Unix"
     ],
-    packages=setuptools.find_packages(where="mergegi"),
+    packages=setuptools.find_packages(exclude=['tests*']),
     python_requires=">=3.6",
     install_requires=open("requirements.txt").read(),
     tests_requires=['pytest'],
