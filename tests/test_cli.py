@@ -15,7 +15,7 @@ def test_mergegi_cli(runner, tmpdir):
     outdir = tmpdir.join("results")
     result = runner.invoke(cli.main, [
         "--samplesheet", os.path.join(test_dir, 'resources', 'samplesheet.csv'),
-        "--input-directory", os.path.join(test_dir, 'resources', 'mgi'),
+        "--input-directory", os.path.join(test_dir, 'resources', 'mgi_se'),
         "--output-directory", outdir,
     ])
     assert result.exit_code == 0

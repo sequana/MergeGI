@@ -48,8 +48,8 @@ def mergegi(barcodes_csv, raw_data_dir, merged_data_dir, paired=False, merge_lan
     # Choosing merge function
     merge_sample_files = merge_all if merge_lanes else merge_per_lane
     # Set the input format for glob
-    input_fformat = f"{raw_data_dir}/L0{{lane}}/*_L0{{lane}}_{{barcode}}_{{p}}*gz"
-    pair = ['1', '2'] if paired else ['1']
+    input_fformat = f"{raw_data_dir}/L0{{lane}}/*_L0{{lane}}_{{barcode}}{{p}}*gz"
+    pair = ['_1', '_2'] if paired else ['']
     # Merge files
     for project_name, samples in file_to_merge.items():
         # Create project output directories
@@ -80,7 +80,7 @@ def merge_all(sample_name, lanes, p, inputff, outdir):
     # Merge all files
     with ExitStack() as stack:
         files = [stack.enter_context(open(filename, 'rb')) for filename in files_to_merge]
-        with open(os.path.join(outdir, f'{sample_name}_{p}.fq.gz'), 'wb') as filout:
+        with open(os.path.join(outdir, f'{sample_name}{p}.fq.gz'), 'wb') as filout:
             for filin in files:
                 shutil.copyfileobj(filin, filout)
 
@@ -101,6 +101,6 @@ def merge_per_lane(sample_name, lanes, p, inputff, outdir):
                     inputff.format(lane=lane, barcode=barcode, p=p)
                 )
             ]
-            with open(os.path.join(outdir, f'{sample_name}_L0{lane}_{p}.fq.gz'), 'wb') as filout:
+            with open(os.path.join(outdir, f'{sample_name}_L0{lane}{p}.fq.gz'), 'wb') as filout:
                 for filin in files:
                     shutil.copyfileobj(filin, filout)

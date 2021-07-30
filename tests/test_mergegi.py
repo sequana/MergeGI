@@ -11,15 +11,15 @@ def test_mergegi_single_end(tmpdir):
     """
     # run merge barcode
     samplesheet = os.path.join(test_dir, 'resources', 'samplesheet.csv')
-    data_dir = os.path.join(test_dir, 'resources', 'mgi')
+    data_dir = os.path.join(test_dir, 'resources', 'mgi_se')
     output_dir = tmpdir.join("mergegi_output")
     mergegi(samplesheet, data_dir, output_dir, paired=False)
 
     # check if files exist
-    b_sample = os.path.join(output_dir, 'toto', 'B_1.fq.gz')
-    assert os.path.exists(os.path.join(output_dir, 'toto', 'A_1.fq.gz'))
+    b_sample = os.path.join(output_dir, 'toto', 'B.fq.gz')
+    assert os.path.exists(os.path.join(output_dir, 'toto', 'A.fq.gz'))
     assert os.path.exists(b_sample)
-    assert os.path.exists(os.path.join(output_dir, 'tata', 'C_1.fq.gz'))
+    assert os.path.exists(os.path.join(output_dir, 'tata', 'C.fq.gz'))
 
     # compare with expected file
     expected_file = os.path.join(test_dir, 'resources', 'expected', 'B_1.fq')
@@ -33,7 +33,7 @@ def test_mergegi_paired(tmpdir):
     """
     # run merge barcode
     samplesheet = os.path.join(test_dir, 'resources', 'samplesheet.csv')
-    data_dir = os.path.join(test_dir, 'resources', 'mgi')
+    data_dir = os.path.join(test_dir, 'resources', 'mgi_pe')
     output_dir = tmpdir.join("mergegi_output")
     mergegi(samplesheet, data_dir, output_dir, paired=True)
 
@@ -55,7 +55,7 @@ def test_mergegi_per_lane(tmpdir):
     """
     # run merge barcode
     samplesheet = os.path.join(test_dir, 'resources', 'samplesheet.csv')
-    data_dir = os.path.join(test_dir, 'resources', 'mgi')
+    data_dir = os.path.join(test_dir, 'resources', 'mgi_pe')
     output_dir = tmpdir.join("mergegi_output")
     mergegi(samplesheet, data_dir, output_dir, paired=True, merge_lanes=False)
 
