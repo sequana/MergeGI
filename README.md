@@ -43,11 +43,19 @@ The software needs a sample sheet that describe the sample name, the associated 
 ```csv
 samplename,barcode,barcode2,project,lane
 A,         1,,              projectA, 1
-B,         2,,              projectA, 1
+B,         20,,              projectA, 1
 A,         1,,              projectA, 2
-C,         2,,              projectB, 2
-C,         3,,              projectB, 1
-B,         3,,              projectA, 2
+C,         20,,              projectB, 2
+C,         30,,              projectB, 1
+B,         30,,              projectA, 2
+```
+
+If you have pooled a sample on the four lanes, meaning it is the same barcode on each lane, you can use the * character to simplify the sample sheet:
+
+```csv
+samplename,barcode,barcode2,project,lane
+A,         1,      ,        ,projectA, *
+B,         20,     ,        ,projectA, *
 ```
 
 > **_IMPORTANT NOTE1:_**  the current version uses the barcode 1 only (column barcode). 
