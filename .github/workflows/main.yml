@@ -4,29 +4,44 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches-ignore: []
+  schedule:
+    - cron: '0 0 * * SUN'
 
 jobs:
   build-linux:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
+      matrix:
+        python: [3.7, 3.8, 3.9]
+      fail-fast: false
+
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+
+    - name: install graphviz
+      run: |
+        sudo apt-get install -y graphviz
+
+    - name: checkout git repo
+      uses: actions/checkout@v2
+
+    - name: conda/mamba
+      uses: mamba-org/provision-with-micromamba@main
       with:
-        python-version: 3.8
-    - name: Add conda to system path
+          environment-file: environment.yml
+          extra-specs: |
+            python=${{ matrix.python }}
+
+    - name: install package itself
+      shell: bash -l {0}
       run: |
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
-    - name: Install dependencies
-      run: |
-        conda install -c conda-forge mamba --quiet
-        mamba install -c conda-forge --quiet -y --file=requirements.txt --file=requirements_dev.txt
+        which pip
+        pip install .[testing]
+
     - name: Lint with flake8
       run: |
         mamba install flake8
@@ -35,5 +50,15 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
+      shell: bash -l {0}
       run: |
-        pytest
+        pytest --cov-report term-missing --cov=mergegi
+    - name: coveralls
+      shell: bash -l {0}
+      run: |
+        echo $COVERALLS_REPO_TOKEN
+        coveralls --service=github
+      env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+

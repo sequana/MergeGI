@@ -84,6 +84,16 @@ By default, lanes are merged. If this is not what you want you may disable this 
 mergegi --samplesheet samplesheet.csv --input-directory mgi_raw_data --output-directory merge_data --paired --no-merge
 ```
 
+## Changelog
+
+
+========= ==========================================================================
+Version   Description
+========= ==========================================================================
+0.1.0     * simplify the CI action workflow and setup
+0.0.1     * first release
+
+
 ## Barcode distribution example
 
 <img src="doc/bccode.png" width="50%">

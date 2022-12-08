@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="MergeGI",
-    version="0.0.1",
+    version="0.1.0",
     author="Sequana Team",
     description="Merge MGI fastq",
     long_description=long_description,
@@ -23,6 +23,15 @@ setuptools.setup(
     python_requires=">=3.6",
     install_requires=open("requirements.txt").read(),
     tests_requires=['pytest'],
+    extras_require={
+        "testing": [
+            "pytest",
+            "pytest-cov",
+            "pytest-xdist",
+            "coveralls",
+        ],
+    },
+
     entry_points={
         'console_scripts': [
             'mergegi=mergegi:main',
