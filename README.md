@@ -29,6 +29,10 @@ For developers:
     cd MergeGI
     pip install -e .[testing]
 
+## Apptainers
+
+MergeGI is available as an apptainer image within the https://damona.readthedocs.io project. For example, the version 0.1.0 is available here:  https://sandbox.zenodo.org/record/1134857/files/mergegi_0.0.1.img  (60Mb).
+
 
 ## Overview
 
