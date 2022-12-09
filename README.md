@@ -1,9 +1,10 @@
 # MergeGI
 
 [![Tests](https://github.com/sequana/MergeGI/actions/workflows/main.yml/badge.svg)](https://github.com/sequana/MergeGI/actions/workflows/main.yml)
-
-
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mergegi)
+[![Coverage Status](https://coveralls.io/repos/github/sequana/MergeGI/badge.svg?branch=main)](https://coveralls.io/github/sequana/MergeGI?branch=main)
+[![PyPI version](https://badge.fury.io/py/mergegi.svg)](https://badge.fury.io/py/mergegi)
+
 
 **MergeGI** provides a single command line to merge and select barcoded raw data from [MGI](https://en.mgi-tech.com/products/) sequencing runs into a set of FastQ files ready for subsequent bioinformatics analysis. 
 
@@ -97,12 +98,10 @@ mergegi --samplesheet samplesheet.csv --input-directory mgi_raw_data --output-di
 
 ## Changelog
 
-
-========= ==========================================================================
-Version   Description
-========= ==========================================================================
-0.1.0     * simplify the CI action workflow and setup
-0.0.1     * first release
+| Version  | Description  |  
+|----------|---
+| 0.1.0    | simplify CI and use pyproject |
+| 0.0.0    | firs release  |
 
 
 ## Barcode distribution example
