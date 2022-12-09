@@ -1,0 +1,46 @@
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+
+[project]
+name = "MergeGI"
+version= "0.1.0"
+authors=[
+    { name="Sequana Team" }
+]
+description="Merge MGI fastq files"
+readme="README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: Unix"
+]
+license = {text="BSD-4-Clause"}
+keywords = ["fastq", "MGI", "merger"]
+dependencies = [
+    "click"
+]
+
+
+[project.optional-dependencies]
+testing = ["pytest", "pytest-cov", "coveralls", "pytest-xdist"]
+
+
+[project.urls]
+"Homepage"= "https://github.com/sequana/MergeGI"
+"Bug Tracker"= "https://github.com/sequana/MergeGI/issues"
+
+
+
+[project.scripts]
+mergegi = "mergegi:main"
+
+
