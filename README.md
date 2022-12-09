@@ -2,6 +2,9 @@
 
 [![Tests](https://github.com/sequana/MergeGI/actions/workflows/main.yml/badge.svg)](https://github.com/sequana/MergeGI/actions/workflows/main.yml)
 
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mergegi)
+
 **MergeGI** provides a single command line to merge and select barcoded raw data from [MGI](https://en.mgi-tech.com/products/) sequencing runs into a set of FastQ files ready for subsequent bioinformatics analysis. 
 
 
@@ -17,6 +20,14 @@ We provide **MergeGI** as a Python library available on [Pypi](https://pypi.pyth
     pip install mergegi
 
 There is no dependencies except for **click** package so that installation should be straightforward. 
+
+
+For developers:
+
+    git clone git@github.com:sequana/MergeGI.git
+    cd MergeGI
+    pip install -e .[testing]
+
 
 ## Overview
 
@@ -83,6 +94,16 @@ By default, lanes are merged. If this is not what you want you may disable this 
 ```bash
 mergegi --samplesheet samplesheet.csv --input-directory mgi_raw_data --output-directory merge_data --paired --no-merge
 ```
+
+## Changelog
+
+
+========= ==========================================================================
+Version   Description
+========= ==========================================================================
+0.1.0     * simplify the CI action workflow and setup
+0.0.1     * first release
+
 
 ## Barcode distribution example
 
