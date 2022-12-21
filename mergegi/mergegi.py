@@ -34,15 +34,15 @@ def mergegi(barcodes_csv, raw_data_dir, merged_data_dir, paired=False, merge_lan
         csv_reader = csv.reader(csvfile, skipinitialspace=True)
         try:
             # skip header and check if column count is good
-            samplename, barcode, barcode2, project, lane = next(csv_reader)
+            samplename, barcode, project, lane = next(csv_reader)
         except ValueError:
             msg = ("Your sample sheet seems to be ill-formed. You must have 5 columns corresponding to:"
-                   " sample names, barcode1, barcode2, project names and lanes."
+                   " sample names, barcode, project names and lanes."
                    " They are expected to be found in this order.")
             logger.error(msg)
             sys.exit(1)
         # Cluster barcode that need to be merge
-        for samplename, barcode, barcode2, project, lane in csv_reader:
+        for samplename, barcode, project, lane in csv_reader:
             file_to_merge[project][samplename][lane.rstrip()].append(barcode)
 
     # Choosing merge function

@@ -56,29 +56,27 @@ The data structure expected by **MergeGI** is the expected output directoy of MG
 
 Where L01/L02 stands for lane 1 and 2.
 
-The software needs a sample sheet that describe the sample name, the associated barcode identifier, the potentially second barcode (if none, the column must still be present with empty strings), the project name (it will be used to create the new output directory), and the lane where is the sample/barcode pair. Here is an example:
+The software needs a sample sheet that describe the sample name, the associated barcode identifier, the project name (it will be used to create the new output directory), and the lane where is the sample/barcode pair. Here is an example:
 
 ```csv
-samplename,barcode,barcode2,project,lane
-A,         1,,              projectA, 1
-B,         20,,              projectA, 1
-A,         1,,              projectA, 2
-C,         20,,              projectB, 2
-C,         30,,              projectB, 1
-B,         30,,              projectA, 2
+samplename,barcode,project,lane
+A,         1,      projectA, 1
+B,         20,     projectA, 1
+A,         1,      projectA, 2
+C,         20,     projectB, 2
+C,         30,     projectB, 1
+B,         30,     projectA, 2
 ```
 
 If you have pooled a sample on the four lanes, meaning it is the same barcode on each lane, you can use the * character to simplify the sample sheet:
 
 ```csv
-samplename,barcode,barcode2,project,lane
-A,         1,      ,        ,projectA, *
-B,         20,     ,        ,projectA, *
+samplename,barcode,project,lane
+A,         1,     ,projectA, *
+B,         20,    ,projectA, *
 ```
 
-> **_IMPORTANT NOTE1:_**  the current version uses the barcode 1 only (column barcode). 
-
-> **_IMPORTANT NOTE2:_**  The header must be present. The header names are not important but columns must be sorted with the expected order: sample name, barcode 1, barcode 2, projetc name, lane. 
+> **_IMPORTANT NOTE:_**  The header must be present. The header names are not important but columns must be sorted with the expected order: sample name, barcode, projetc name, lane. 
 
 
 Given the sample sheet, and the input directory (top level of the MGI runs), this command should create a new clean directory with the relevant FastQ files (here in merge_data directory):
