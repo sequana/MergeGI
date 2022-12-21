@@ -76,7 +76,7 @@ A,         1,     ,projectA, *
 B,         20,    ,projectA, *
 ```
 
-> **_IMPORTANT NOTE:_**  The header must be present. The header names are not important but columns must be sorted with the expected order: sample name, barcode, projetc name, lane. 
+> **_IMPORTANT NOTE:_**  The header must be present. The header names are not important but columns must be sorted with the expected order: sample name, barcode, project name, lane. 
 
 
 Given the sample sheet, and the input directory (top level of the MGI runs), this command should create a new clean directory with the relevant FastQ files (here in merge_data directory):
