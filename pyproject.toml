@@ -1,37 +1,45 @@
-
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "MergeGI"
-version= "0.1.0"
-authors=[
-    { name="Sequana Team" }
-]
+version= "0.3.0"
+authors=["Sequana Team"]
 description="Merge MGI fastq files"
+license = "BSD-4-Clause"
 readme="README.md"
-requires-python = ">=3.7"
 classifiers = [
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "License :: OSI Approved :: BSD License",
     "Operating System :: Unix"
 ]
-license = {text="BSD-4-Clause"}
 keywords = ["fastq", "MGI", "merger"]
-dependencies = [
-    "click"
+include = [
+    { path = "mergegi", format = ["sdist", "wheel"] },
 ]
 
-[project.optional-dependencies]
-testing = ["pytest", "pytest-cov", "coveralls", "pytest-xdist"]
+[tool.poetry.urls]
+"Homepage" = "https://github.com/sequana/MergeGI"
+"Bug Tracker" = "https://github.com/sequana/MergeGI/issues"
 
-[project.urls]
-"Homepage"= "https://github.com/sequana/MergeGI"
-"Bug Tracker"= "https://github.com/sequana/MergeGI/issues"
-
-[project.scripts]
+[tool.poetry.scripts]
 mergegi = "mergegi:main"
+mergegi_convert = "mergegi.cli:convert"
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+click = "^8.1.3"
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.7.0"
+flake8 = "^6.0.0"
+black = "^22.12.0"
+isort = "^5.11.3"
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+coveralls = "^3.3.1"
+pytest-xdist = "^3.1.0"
+
