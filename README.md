@@ -6,7 +6,7 @@
 [![PyPI version](https://badge.fury.io/py/mergegi.svg)](https://badge.fury.io/py/mergegi)
 
 
-**MergeGI** provides a single command line to merge and select barcoded raw data from [MGI](https://en.mgi-tech.com/products/) sequencing runs into a set of FastQ files ready for subsequent bioinformatics analysis. 
+**MergeGI** provides a single command line to merge and select barcoded raw data from [MGI](https://en.mgi-tech.com/products/) sequencing runs into a set of FastQ files ready for subsequent bioinformatics analysis.
 
 
 - [Installation](#installation)
@@ -16,7 +16,7 @@
 
 ## Installation
 
-We provide **MergeGI** as a Python library available on [Pypi](https://pypi.python.org). The standalone application is called **mergegi** and can be installed in an environment with Python>3.6 as follows:
+We provide **MergeGI** as a Python library available on [Pypi](https://pypi.python.org). The standalone application is called **mergegi** and can be installed in an environment with Python>3.7 as follows:
 
     pip install mergegi
 
