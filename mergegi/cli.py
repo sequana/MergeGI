@@ -1,5 +1,7 @@
 import click
 
+from mergegi.samplesheet_converter import create_mergegi_csv
+
 from . import mergegi
 
 
@@ -12,7 +14,7 @@ from . import mergegi
     metavar='SAMPLESHEET',
     nargs=1,
     required=True,
-    help="CSV file with the samples names, barcode1, barcode2, project names and lanes."
+    help="CSV file with the samples names, barcode, project names and lanes."
     " The CSV should have a header and columns should be in this order.",
 )
 @click.option(
@@ -73,3 +75,39 @@ def main(samplesheet, input_directory, output_directory, paired, merge):
         mergegi -s samplesheet.csv -i mgi_fastq_folder -o merged_fastqs_folder --no-merge
     """
     mergegi(samplesheet, input_directory, output_directory, paired, merge)
+
+
+@click.command(
+    context_settings={'help_option_names': ['-h', '--help']}
+)
+@click.option(
+    '-s', '--samplesheet',
+    type=click.Path(exists=True),
+    metavar='SAMPLESHEET',
+    nargs=1,
+    required=True,
+    help="CSV file with the samples names, indexID, barcodei7, project names and lanes."
+    " The CSV should have a header and columns should be in this order."
+    " For Illumina conversion, you may need to add barcodei5 after barcodei7.",
+)
+@click.option(
+    '-o', '--output-csv',
+    type=click.Path(),
+    metavar='SAMPLESHEET',
+    nargs=1,
+    required=True,
+    help="CSV file with the samples names, barcode, project names and lanes."
+)
+@click.option(
+    '-b', '--barcode-tsv',
+    type=click.Path(),
+    metavar='BARCODE',
+    nargs=1,
+    help="TSV file with indexID and barcodes for the MGI splitBarcode tool."
+)
+def convert(samplesheet, output_csv, barcode_tsv):
+    """ Convert a SampleSheet.csv to the SampleSheet needed by MergeGI to process the merge.
+    Example:
+        mergegi_convert -s SampleSheet.csv -o mergegi.csv -b dualindex.tsv
+    """
+    create_mergegi_csv(samplesheet, output_csv, barcode_tsv)

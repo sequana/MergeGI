@@ -1,8 +1,8 @@
 import click.testing as cli_test
 import pytest
-import os
 
 from mergegi import cli
+
 from . import test_dir
 
 
@@ -12,16 +12,32 @@ def runner():
 
 
 def test_mergegi_cli(runner, tmpdir):
-    outdir = tmpdir.join("results")
-    result = runner.invoke(cli.main, [
-        "--samplesheet", os.path.join(test_dir, 'resources', 'samplesheet.csv'),
-        "--input-directory", os.path.join(test_dir, 'resources', 'mgi_se'),
-        "--output-directory", outdir,
-    ])
+    outdir = tmpdir / "results"
+    result = runner.invoke(
+        cli.main,
+        [
+            "--samplesheet",
+            test_dir / "resources" / "samplesheet.csv",
+            "--input-directory",
+            test_dir / "resources" / "mgi_se",
+            "--output-directory",
+            outdir,
+        ],
+    )
     assert result.exit_code == 0
-    assert os.path.exists(outdir)
+    assert outdir.exists()
 
 
 def test_default_mergegi_cli(runner):
-    result = runner.invoke(cli.main, input='\n')
+    result = runner.invoke(cli.main, input="\n")
     assert result.exit_code == 2
+
+
+def test_mergegi_convert_cli(runner, tmpdir):
+    output = tmpdir / "mergegi.csv"
+    result = runner.invoke(
+        cli.convert,
+        ["--samplesheet", test_dir / "resources" / "samplesheet_barcode.csv", "--output-csv", output],
+    )
+    assert result.exit_code == 0
+    assert output.exists()
