@@ -26,19 +26,15 @@ jobs:
           poetry build
 
     - name: Config Test PyPI
-      env:
-        TEST_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
       run: |
         poetry config repositories.testpypi https://test.pypi.org/legacy/
-        poetry config pypi-token.testpypi "$TEST_TOKEN"
+        poetry config pypi-token.testpypi "${{ secrets.TEST_PYPI_API_TOKEN }}"
 
     - name: Publish distribution to Test PyPI
-      run: poetry publish -r testpypi
+      run: poetry publish -r testpypi 
 
     - name: Config PyPI
-      env:
-        PYPI_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
-      run: poetry config pypi-token.pypi "$PYPI_TOKEN"
+      run: poetry config pypi-token.pypi "${{ secrets.PYPI_API_TOKEN }}"
 
     - name: Publish distribution to PyPI
       if: startsWith(github.ref, 'refs/tags')
