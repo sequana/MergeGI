@@ -12,13 +12,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Install poetry
+      run: pipx install poetry
+
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
         python-version: 3.9
-
-    - name: Install poetry
-      run: pipx install poetry
 
     - name: Build source tarball
       run: |
@@ -26,9 +26,10 @@ jobs:
           poetry build
 
     - name: Config Test PyPI
-      run: |
-          poetry config repositories.testpypi https://test.pypi.org/legacy/
-          poetry config pypi-token.testpypi ${{ secrets.TEST_PYPI_API_TOKEN }}
+      run: poetry config repositories.testpypi https://test.pypi.org/legacy/
+    
+    - name: Config Test Secret
+      run: poetry config pypi-token.testpypi ${{ secrets.TEST_PYPI_API_TOKEN }}
 
     - name: Publish distribution to Test PyPI
       run: poetry publish -r testpypi
