@@ -1,0 +1,35 @@
+# Config file for mergegi
+input_directory: ""
+input_pattern: "*_[12].fq.gz"
+input_samplesheet: ""
+
+##############################################################################
+# Split Barcode
+#
+# :Parameters:
+# - barcode1: start position, length and number of mismatch you authorize.
+# - barcode2: start position, length and number of mismatch you authorize.
+# - threads: number of threads to be used.
+# - resources: computing resources needed to run the job on a cluster
+#
+split_barcode:
+  barcode1: "300 10 1"
+  barcode2: "310 10 1"
+  options: ""
+  threads: 16
+  resources:
+    mem: 96G
+
+##############################################################################
+# MergeGI
+#
+# :Parameters:
+# - barcode1: start position, length and number of mismatch you authorize.
+# - barcode2: start position, length and number of mismatch you authorize.
+# - threads: number of threads to be used.
+# - resources: computing resources needed to run the job on a cluster
+#
+mergegi:
+  options: ""
+  resources:
+    mem: 4G
