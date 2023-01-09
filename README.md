@@ -27,12 +27,25 @@ For developers:
 
     git clone git@github.com:sequana/MergeGI.git
     cd MergeGI
-    pip install -e .[testing]
+    poetry install
+    poetry shell
+
+We also provide a pipeline for demultiplexing MGI data in Snakemake, which can be installed as an extra package:
+
+    pip install mergegi[sequana]
+
+It installs **snakemake** and **sequana_pipetools** and you have access to **sequana_mergegi** command.
+
+For developers:
+
+    git clone git@github.com:sequana/MergeGI.git
+    cd MergeGI
+    poetry install --all-extras
+    poetry shell
 
 ## Apptainers
 
 MergeGI is available as an apptainer image within the https://damona.readthedocs.io project. For example, the version 0.1.0 is available here:  https://sandbox.zenodo.org/record/1134857/files/mergegi_0.0.1.img  (60Mb).
-
 
 ## Overview
 
@@ -47,7 +60,6 @@ Third, a MGI flowcell has several lanes. You may want to merge the lanes or not.
 Those 3 steps should be managed seemlessly by our tool given a sample sheet and the output directory of the MGI runs.
 
 ## General Usage and Examples
-
 
 The data structure expected by **MergeGI** is the expected output directoy of MGI runs:
 
@@ -102,6 +114,7 @@ mergegi --samplesheet samplesheet.csv --input-directory mgi_raw_data --output-di
 
 | Version  | Description  |  
 |----------|---
+| 0.2.0    | use poetry and add sequana_mergegi as extra dependencies |
 | 0.1.0    | simplify CI and use pyproject |
 | 0.0.0    | firs release  |
 
