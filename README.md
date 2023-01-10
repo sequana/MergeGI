@@ -114,7 +114,7 @@ mergegi --samplesheet samplesheet.csv --input-directory mgi_raw_data --output-di
 
 | Version  | Description  |  
 |----------|---
-| 0.2.1    | use poetry and add sequana_mergegi as extra dependencies |
+| 0.2.2    | use poetry and add sequana_mergegi as extra dependencies |
 | 0.1.0    | simplify CI and use pyproject |
 | 0.0.0    | firs release  |
 

@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "MergeGI"
-version= "0.2.1"
+version= "0.2.2"
 authors=["Sequana Team"]
 description="Merge MGI fastq files"
 license = "BSD-4-Clause"
@@ -41,7 +41,7 @@ click = "^8.1.3"
 
 # Deps needed for the sequana_pipelines
 snakemake = { version = "^7.19.1", optional = true }
-sequana_pipetools = { version = "^0.10.0", optional = true }
+sequana_pipetools = { version = "^0.10.1", optional = true }
 
 [tool.poetry.extras]
 sequana = ["snakemake", "sequana_pipetools"]
